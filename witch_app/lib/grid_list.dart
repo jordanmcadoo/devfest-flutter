@@ -202,31 +202,31 @@ class GridListDemoState extends State<GridListDemo> {
       title: 'Not Hotdog',
     ),
     Photo(
-      assetName: 'places/india_tanjore_bronze_works.png',
-      title: 'Not Jackie Chan',
+      assetName: 'assets/stars.png',
+      title: 'Star Map',
     ),
     Photo(
-      assetName: 'places/india_tanjore_market_merchant.png',
+      assetName: 'assets/phone.png',
       title: 'call me, maybe?',
     ),
     Photo(
-      assetName: 'places/india_tanjore_thanjavur_temple.png',
-      title: 'Name Generator',
+      assetName: 'assets/potion.png',
+      title: 'Potion Recipes',
     ),
     Photo(
-      assetName: 'places/india_tanjore_thanjavur_temple_carvings.png',
-      title: 'dotjo',
-    ),
-    Photo(
-      assetName: 'places/india_pondicherry_salt_farm.png',
+      assetName: 'assets/meow.png',
       title: 'meow',
     ),
     Photo(
-      assetName: 'places/india_chennai_highway.png',
+      assetName: 'assets/notjackie.png',
+      title: 'Not Jackie Chan',
+    ),
+    Photo(
+      assetName: 'assets/spellbook.png',
       title: 'Spellbook',
     ),
     Photo(
-      assetName: 'places/india_chettinad_silk_maker.png',
+      assetName: 'assets/witchhat.png',
       title: 'idk',
     ),
   ];
