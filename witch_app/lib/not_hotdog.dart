@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -17,7 +16,6 @@ class NotHotdog extends StatefulWidget {
 class _NotHotdogState extends State<NotHotdog> {
   File _image;
   List _recognitions;
-//  bool _isHotdog;
 
   Future getImage(ImageLocation imageLocation) async {
     var image;
@@ -76,8 +74,8 @@ class _NotHotdogState extends State<NotHotdog> {
 
     if (mappedRec.isNotEmpty) {
       mappedRec.forEach((item) {
-        print(item.label + " - " + item.confidence.toString());
         if (item.label == "hotdog") {
+          print(item.label + " - " + item.confidence.toString());
           if (item.confidence > 0.25) {
             isHotdog = true;
           }
@@ -113,21 +111,11 @@ class _NotHotdogState extends State<NotHotdog> {
                     AsyncSnapshot<bool> isHotdog,
                     ) {
                   if (isHotdog.data != null) {
-                    print(">>> isHotdog?");
-                    print(isHotdog.data);
                     return Prediction(isHotdog.data);
                   } else {
                     return Container();
                   }
                 }),
-
-//
-//            Container(
-//              child: _recognitions != null ?
-//                  Prediction(determineIfHotdog()) : null
-//            ),
-
-
           ],
         ),
         floatingActionButton: Row(
