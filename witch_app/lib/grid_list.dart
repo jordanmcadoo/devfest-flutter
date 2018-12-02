@@ -147,20 +147,6 @@ class GridDemoPhotoItem extends StatelessWidget {
     Navigator.push(context, MaterialPageRoute<void>(
         builder: (BuildContext context) {
           return HotdogApp.NotHotdog();
-
-//          return Scaffold(
-//            appBar: AppBar(
-//                title: Text(photo.title)
-//            ),
-//            body: SizedBox.expand(
-//              child: Hero(
-//                tag: photo.tag,
-//                child: GridPhotoViewer(photo: photo),
-//              ),
-//            ),
-//          );
-
-
         }
     ));
   }

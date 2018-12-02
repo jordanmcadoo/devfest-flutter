@@ -31,6 +31,14 @@ final ThemeData CustomTheme = new ThemeData(
     accentColor: CustomColors.darkPink[500],
     accentColorBrightness: Brightness.light,
     fontFamily: 'RobotoMono',
+    primaryTextTheme: TextTheme(
+        title: TextStyle(
+            color: Colors.white
+        )
+    ),
+    primaryIconTheme:  IconThemeData(
+      color: Colors.white, //change your color here
+    ),
 );
 
 class CustomColors {

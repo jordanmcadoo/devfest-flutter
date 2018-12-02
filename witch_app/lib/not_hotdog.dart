@@ -34,8 +34,17 @@ class _NotHotdogState extends State<NotHotdog> {
   File _image;
   List _recognitions;
 
-  Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+  Future getImage(ImageLocation imageLocation) async {
+    var image;
+    switch (imageLocation) {
+      case ImageLocation.camera:
+        image = await ImagePicker.pickImage(source: ImageSource.camera);
+        break;
+      case ImageLocation.gallery:
+        image = await ImagePicker.pickImage(source: ImageSource.gallery);
+        break;
+    }
+
     recognizeImage(image);
     setState(() {
       _image = image;
@@ -75,11 +84,14 @@ class _NotHotdogState extends State<NotHotdog> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          title: const Text('Not Hotdog'),
+          title: const Text('Not Hotdog', style: TextStyle(color: Colors.white)),
+          iconTheme: IconThemeData(
+            color: Colors.white, //change your color here
+          ),
         ),
+        backgroundColor: Theme.CustomColors.lightPink[500],
         body: Stack(
           children: <Widget>[
             Center(
@@ -105,12 +117,32 @@ class _NotHotdogState extends State<NotHotdog> {
             ),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: getImage,
-          tooltip: 'Pick Image',
-          child: Icon(Icons.add_a_photo),
-        ),
-      ),
-    );
+        floatingActionButton: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            FloatingActionButton(
+              heroTag: null,
+              onPressed: () { getImage(ImageLocation.camera); },
+              tooltip: 'Pick Image',
+              child: Icon(Icons.add_a_photo),
+            ),
+            new Container(
+              width: 10.0,
+            ),
+            FloatingActionButton(
+              heroTag: null,
+              onPressed: () { getImage(ImageLocation.gallery); },
+              tooltip: 'Pick Image',
+              child: Icon(Icons.insert_photo),
+            ),
+          ],
+        )
+      );
   }
+}
+
+enum ImageLocation {
+  camera,
+  gallery
 }
