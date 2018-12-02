@@ -127,6 +127,8 @@ class _NotHotdogState extends State<NotHotdog> {
               onPressed: () { getImage(ImageLocation.camera); },
               tooltip: 'Pick Image',
               child: Icon(Icons.add_a_photo),
+              backgroundColor: Theme.CustomColors.lightYellow[500],
+              foregroundColor: Theme.CustomColors.darkPink[500],
             ),
             new Container(
               width: 10.0,
@@ -136,6 +138,8 @@ class _NotHotdogState extends State<NotHotdog> {
               onPressed: () { getImage(ImageLocation.gallery); },
               tooltip: 'Pick Image',
               child: Icon(Icons.insert_photo),
+              backgroundColor: Theme.CustomColors.lightYellow[500],
+              foregroundColor: Theme.CustomColors.darkPink[500],
             ),
           ],
         )

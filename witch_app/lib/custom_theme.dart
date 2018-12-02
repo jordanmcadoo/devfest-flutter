@@ -87,4 +87,18 @@ class CustomColors {
     900: const Color(0xFFB72D4B)
   };
   static const int _lightPinkPrimaryValue = 0xFFF7CBD7;
+
+  static const Map<int, Color> lightYellow = const <int, Color> {
+    50: const Color(0xFFFFFDF0),
+    100: const Color(0xFFFFFBD9),
+    200: const Color(0xFFFFF9C0),
+    300: const Color(0xFFFFF6A7),
+    400: const Color(0xFFFFF494),
+    500: const Color(_lightYellowPrimaryValue),
+    600: const Color(0xFFFFF079),
+    700: const Color(0xFFFFEE6E),
+    800: const Color(0xFFFFEC64),
+    900: const Color(0xFFFFE851)
+  };
+  static const int _lightYellowPrimaryValue = 0xFFFFF281;
 }
