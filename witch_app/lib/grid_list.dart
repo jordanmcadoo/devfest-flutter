@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'custom_theme.dart' as Theme;
+import 'not_hotdog.dart' as HotdogApp;
 
 const double _kMinFlingVelocity = 800.0;
 
@@ -145,17 +146,21 @@ class GridDemoPhotoItem extends StatelessWidget {
   void showPhoto(BuildContext context) {
     Navigator.push(context, MaterialPageRoute<void>(
         builder: (BuildContext context) {
-          return Scaffold(
-            appBar: AppBar(
-                title: Text(photo.title)
-            ),
-            body: SizedBox.expand(
-              child: Hero(
-                tag: photo.tag,
-                child: GridPhotoViewer(photo: photo),
-              ),
-            ),
-          );
+          return HotdogApp.NotHotdog();
+
+//          return Scaffold(
+//            appBar: AppBar(
+//                title: Text(photo.title)
+//            ),
+//            body: SizedBox.expand(
+//              child: Hero(
+//                tag: photo.tag,
+//                child: GridPhotoViewer(photo: photo),
+//              ),
+//            ),
+//          );
+
+
         }
     ));
   }
