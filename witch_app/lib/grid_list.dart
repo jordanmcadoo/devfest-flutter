@@ -159,8 +159,6 @@ class GridDemoPhotoItem extends StatelessWidget {
 //              ),
 //            ),
 //          );
-
-
         }
     ));
   }

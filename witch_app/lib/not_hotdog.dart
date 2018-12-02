@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:camera/camera.dart';
 
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
+import 'camera_selection.dart' as CameraSelection;
 
 import 'custom_theme.dart' as Theme;
 
@@ -33,6 +35,28 @@ class NotHotdog extends StatefulWidget {
 class _NotHotdogState extends State<NotHotdog> {
   File _image;
   List _recognitions;
+  List<CameraDescription> _cameras;
+
+  Future _loadCamera() async {
+    try {
+      var cameras = await availableCameras();
+      setState(() {
+        _cameras = cameras;
+      });
+    } on CameraException catch (e) {
+      print('Error: $e.code\nError Message: $e.message');
+    }
+  }
+
+  void openCameraSelection(BuildContext context) async {
+    await _loadCamera();
+    Navigator.push(context, MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          //return HotdogApp.NotHotdog();
+          return CameraSelection.HomePage(_cameras);
+        }
+    ));
+  }
 
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -66,6 +90,7 @@ class _NotHotdogState extends State<NotHotdog> {
       numResults: 6,
       threshold: 0.05,
     );
+    print(">>>>");
     print(recognitions);
     setState(() {
       _recognitions = recognitions;
@@ -106,7 +131,8 @@ class _NotHotdogState extends State<NotHotdog> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: getImage,
+          onPressed: () { openCameraSelection(context); },
+//          onPressed: getImage,
           tooltip: 'Pick Image',
           child: Icon(Icons.add_a_photo),
         ),
