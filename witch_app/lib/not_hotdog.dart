@@ -7,23 +7,7 @@ import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'custom_theme.dart' as Theme;
-
-//class NotHotdog extends StatelessWidget {
-//  Future getImage() async {
-//    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-//  }
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//        appBar: AppBar(
-//          title: Text('Not Hotdog'),
-//        ),
-//        backgroundColor: Theme.CustomColors.lightPink[500],
-//        body: Center(
-//          child: FloatingActionButton(onPressed: getImage)
-//        )
-//    );
-//  }
-//}
+import 'prediction.dart';
 
 class NotHotdog extends StatefulWidget {
   @override
@@ -79,7 +63,7 @@ class _NotHotdogState extends State<NotHotdog> {
     setState(() {
       _recognitions = recognitions;
     });
-    // await Tflite.close();
+     await Tflite.close();
   }
 
   @override
@@ -88,7 +72,7 @@ class _NotHotdogState extends State<NotHotdog> {
         appBar: AppBar(
           title: const Text('Not Hotdog', style: TextStyle(color: Colors.white)),
           iconTheme: IconThemeData(
-            color: Colors.white, //change your color here
+            color: Colors.white,
           ),
         ),
         backgroundColor: Theme.CustomColors.lightPink[500],
@@ -99,21 +83,23 @@ class _NotHotdogState extends State<NotHotdog> {
                   ? Text('No image selected.')
                   : Image.file(_image),
             ),
-            Center(
-              child: Column(
-                children: _recognitions != null
-                    ? _recognitions.map((res) {
-                  return Text(
-                    "${res["index"]} - ${res["label"]}: ${res["confidence"].toString()}",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20.0,
-                      background: Paint()..color = Colors.white,
-                    ),
-                  );
-                }).toList()
-                    : [],
-              ),
+            Container(
+              child: _recognitions != null ?
+                  Prediction(true) : null
+//              Column(
+//                children: _recognitions != null
+//                    ? _recognitions.map((res) {
+//                  return Text(
+//                    "${res["index"]} - ${res["label"]}: ${res["confidence"].toString()}",
+//                    style: TextStyle(
+//                      color: Colors.black,
+//                      fontSize: 20.0,
+//                      background: Paint()..color = Colors.white,
+//                    ),
+//                  );
+//                }).toList()
+//                    : [],
+//              ),
             ),
           ],
         ),
