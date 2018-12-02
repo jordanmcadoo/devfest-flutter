@@ -17,6 +17,7 @@ class NotHotdog extends StatefulWidget {
 class _NotHotdogState extends State<NotHotdog> {
   File _image;
   List _recognitions;
+//  bool _isHotdog;
 
   Future getImage(ImageLocation imageLocation) async {
     var image;
@@ -63,7 +64,28 @@ class _NotHotdogState extends State<NotHotdog> {
     setState(() {
       _recognitions = recognitions;
     });
-     await Tflite.close();
+//     await Tflite.close();
+  }
+
+  Future<bool> determineIfHotdog() async {
+    if (_recognitions == null) return null;
+    var isHotdog = false;
+    var mappedRec = _recognitions.map((res) {
+      return Recognition(res["label"], res["confidence"]);
+    });
+
+    if (mappedRec.isNotEmpty) {
+      mappedRec.forEach((item) {
+        print(item.label + " - " + item.confidence.toString());
+        if (item.label == "hotdog") {
+          if (item.confidence > 0.25) {
+            isHotdog = true;
+          }
+        }
+      });
+    }
+
+    return isHotdog;
   }
 
   @override
@@ -83,24 +105,29 @@ class _NotHotdogState extends State<NotHotdog> {
                   ? Text('No image selected.')
                   : Image.file(_image),
             ),
-            Container(
-              child: _recognitions != null ?
-                  Prediction(true) : null
-//              Column(
-//                children: _recognitions != null
-//                    ? _recognitions.map((res) {
-//                  return Text(
-//                    "${res["index"]} - ${res["label"]}: ${res["confidence"].toString()}",
-//                    style: TextStyle(
-//                      color: Colors.black,
-//                      fontSize: 20.0,
-//                      background: Paint()..color = Colors.white,
-//                    ),
-//                  );
-//                }).toList()
-//                    : [],
-//              ),
-            ),
+
+            FutureBuilder(
+                future: determineIfHotdog(),
+                builder: (
+                    BuildContext context,
+                    AsyncSnapshot<bool> isHotdog,
+                    ) {
+                  if (isHotdog.data != null) {
+                    print(">>> isHotdog?");
+                    print(isHotdog.data);
+                    return Prediction(isHotdog.data);
+                  } else {
+                    return Container();
+                  }
+                }),
+
+//
+//            Container(
+//              child: _recognitions != null ?
+//                  Prediction(determineIfHotdog()) : null
+//            ),
+
+
           ],
         ),
         floatingActionButton: Row(
@@ -131,4 +158,14 @@ class _NotHotdogState extends State<NotHotdog> {
 enum ImageLocation {
   camera,
   gallery
+}
+
+class Recognition {
+  String label;
+  double confidence;
+
+  Recognition(String label, double confidence) {
+    this.label = label;
+    this.confidence = confidence;
+  }
 }
