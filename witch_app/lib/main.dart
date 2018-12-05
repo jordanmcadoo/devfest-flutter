@@ -16,33 +16,19 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       color: Theme.CustomColors.greenBlue[500],
       theme: Theme.CustomTheme,
-      home: LandingPage(title: 'witch app'),
+      home: LandingPage(),
     );
   }
 }
 
 class LandingPage extends StatelessWidget {
-  LandingPage({Key key, this.title}) : super(key: key);
-  final String title;
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: new Image.asset('assets/witch-app-white.png', fit: BoxFit.cover),
       ),
       backgroundColor: Theme.CustomColors.lightPink[500],
-
       body: GridList.GridListDemo()
-
-//      body: Center(
-//          child: Text(
-//            "hello this is app",
-//            style: TextStyle(
-//                fontSize: 30.0,
-//                color: Theme.CustomColors.darkPink[500]
-//            ),
-//          )
-//      ),
     );
   }
 }
